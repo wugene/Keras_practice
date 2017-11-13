@@ -30,7 +30,7 @@ G_hist_raw = load_data(G_f_src)
 print(len(G_hist_raw))
 
 
-# In[ ]:
+# In[4]:
 
 
 from scipy import stats
@@ -116,7 +116,7 @@ def kxy_ae(hist_all):
     return (k_all, x_all, y_all)
 
 
-# In[ ]:
+# In[5]:
 
 
 G_data_ae = kxy_ae(G_hist_raw)

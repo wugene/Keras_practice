@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# In[26]:
+# In[2]:
 
 
 import gzip, pickle
@@ -162,7 +162,7 @@ with tf.Session() as sess:
     print('Final Loss: %f' % (epoch_loss))
 
 
-# In[13]:
+# In[8]:
 
 
 n_after = 10 #len(after_l)
@@ -178,7 +178,7 @@ plt.axis('on')
 plt.show()
 
 
-# In[14]:
+# In[9]:
 
 
 plt.figure(figsize=(10,3), dpi=100)
@@ -186,7 +186,7 @@ plt.imshow(G_x_enc[:160000].T.reshape(800,-1), origin="upper", cmap="bwr")
 plt.show()
 
 
-# In[18]:
+# In[14]:
 
 
 from scipy import stats
@@ -197,6 +197,12 @@ def normalize_enc(enc):
     
     for T in enc_T:
         T_new = stats.zscore(T)
+        for i in range(len(T_new)):
+            if (T_new[i] > 5.0):
+                T_new[i] = 5.0
+            elif (T_new[i] < -5.0):
+                T_new[i] = -5.0
+                
         T_new_sum = sum(T_new)
         #print(T_new_sum)
         if (T_new_sum < 1.0) and (T_new_sum > -1.0):
@@ -205,21 +211,21 @@ def normalize_enc(enc):
     return np.transpose(enc_T_new)
 
 
-# In[22]:
+# In[15]:
 
 
 G_x_norm = normalize_enc(G_x_enc)
 print ("Normalization dim = (%d, %d) -> (%d, %d)" % (len(G_x_enc), len(G_x_enc[0]), len(G_x_norm), len(G_x_norm[0])))
 
 
-# In[23]:
+# In[16]:
 
 
 G_data_ae2 = (G_k, G_x_norm, G_y)
 save_data(G_data_ae2, G_f_tar)
 
 
-# In[25]:
+# In[17]:
 
 
 plt.figure(figsize=(10,3), dpi=100)

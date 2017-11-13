@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[43]:
+# In[1]:
 
 
 import gzip, pickle
@@ -24,7 +24,7 @@ def save_data(d, fn):
 (G_k, G_x, G_y) = load_data(G_f_src)
 
 
-# In[13]:
+# In[3]:
 
 
 import pandas as pd
@@ -50,13 +50,13 @@ def encode_to_df(k, x, y):
     return x_df, y_df
 
 
-# In[14]:
+# In[4]:
 
 
 G_x_df, G_y_df = encode_to_df(G_k, G_x, G_y)
 
 
-# In[18]:
+# In[5]:
 
 
 def is_nan_in_df(df_all):
@@ -69,13 +69,13 @@ def is_nan_in_df(df_all):
     return False
 
 
-# In[19]:
+# In[6]:
 
 
 is_nan_in_df(G_x_df)
 
 
-# In[36]:
+# In[7]:
 
 
 import numpy as np
@@ -101,20 +101,20 @@ def dim_convert(df_x):
     return df.from_dict(x_all, orient='index')
 
 
-# In[37]:
+# In[8]:
 
 
 G_x_df_T = dim_convert(G_x_df)
 
 
-# In[41]:
+# In[9]:
 
 
 print (G_x_df_T.columns)
 print (G_x_df_T.index)
 
 
-# In[42]:
+# In[10]:
 
 
 G_data_ae3 = (G_x_df_T, G_y_df)
