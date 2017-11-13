@@ -4,16 +4,11 @@
 # In[2]:
 
 
-# %load AE_2nd_prep.py
-
-
-# In[1]:
-
 
 import gzip, pickle
 
-G_f_src = "AE1_out.pkl.gz"
-G_f_tar = "AE2_in.pkl.gz"
+G_f_src = "AE2_out.pkl.gz"
+G_f_tar = "AE3_in.pkl.gz"
 
 def load_data(fn):
     with gzip.open(fn) as f:
@@ -24,17 +19,36 @@ def save_data(d, fn):
         pickle.dump(d, f)
 
 
-# In[2]:
-
-
-(G_k, G_x, G_y) = load_data(G_f_src)
-
-
 # In[3]:
 
 
 import pandas as pd
 from pandas import DataFrame as df
+
+(G_x, G_y) = load_data(G_f_src)
+
+
+# In[ ]:
+
+
+
+def flatten_x(x):
+    k_flat = list()
+    x_flat = list()
+
+    for d, r in x.iterrows():
+        for z, l in r.iteritems():
+            k = (z, d)
+            k_flat.append( k )
+            x_flat.append( l )
+    
+    return k_flat, x_flat
+
+
+
+# In[ ]:
+
+
 
 def encode_to_df(k, x, y):
     x_all = dict()
@@ -125,5 +139,4 @@ print (G_x_df_T.index)
 
 G_data_ae3 = (G_x_df_T, G_y_df)
 save_data(G_data_ae3, G_f_tar)
-
 
