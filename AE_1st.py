@@ -218,3 +218,11 @@ print ("Normalization dim = (%d, %d) -> (%d, %d)" % (len(G_x_enc), len(G_x_enc[0
 G_data_ae2 = (G_k, G_x_norm, G_y)
 save_data(G_data_ae2, G_f_tar)
 
+
+# In[25]:
+
+
+plt.figure(figsize=(10,3), dpi=100)
+plt.imshow(G_x_norm[:160000].T.reshape(800,-1), origin="upper", cmap="bwr")
+plt.show()
+
